@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Model {
+    /*
     public Model(int id, String nameProf, String zp, String company, String tr, String op, String tel, String email) {
         this.id = id;
         this.nameProf = nameProf;
@@ -14,7 +15,7 @@ public class Model {
         this.tel = tel;
         this.email = email;
     }
-
+*/
     @SerializedName("id")
     @Expose
     private int id;
