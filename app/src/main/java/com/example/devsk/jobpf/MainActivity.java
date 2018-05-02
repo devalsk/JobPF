@@ -5,18 +5,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.io.IOException;
+import com.example.devsk.jobpf.models.Vacancy;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    List<Model> models;
+    List<Vacancy> models;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,23 +26,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        ModelAdapter modelAdapter = new ModelAdapter(models);
-        recyclerView.setAdapter(modelAdapter);
 
-
-        App.getJobApi().getJob().enqueue(new Callback<List<Model>>() {
-            @Override
-            public void onResponse(Call<List<Model>> call, Response<List<Model>> response) {
-
-                models.addAll(response.body());
-                recyclerView.getAdapter().notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<Model>> call, Throwable t) {
-
-            }
-        });
 
 
     }
