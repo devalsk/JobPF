@@ -8,7 +8,7 @@
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="JobPF"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
@@ -18,7 +18,7 @@
         </activity>
         <activity
             android:name=".MainActivityJob"
-            android:label="@string/title_activity_main_job"
+            android:label="JobPF"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,11 +26,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivityJob" />
+        <activity
+            android:name=".DetailsActivityJob"
+            android:label="Вакансия" />
         <activity
             android:name=".Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="Новость"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NewsActivity"
+            android:label="Новости" />
+        <activity
+            android:name=".BrowserActivity"
+            android:label="Новость" />
+        .
+        <activity
+            android:name=".CompanyListActivity"
+            android:label="Компании" />
+        <activity android:name=".DetailsCompanyActivity"></activity>
     </application>
 
 </manifest>

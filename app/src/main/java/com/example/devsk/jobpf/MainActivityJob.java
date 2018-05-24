@@ -1,9 +1,9 @@
 package com.example.devsk.jobpf;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,37 +13,41 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.devsk.jobpf.models.Model;
-import com.example.devsk.jobpf.models.Vacancy;
+import com.example.devsk.jobpf.modelsvacancy.Model;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class MainActivityJob extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     RecyclerView recyclerView;
     List models;
+    SpotsDialog dialog;
+    Intent intent;
+    MaterialSearchView materialSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_job);
+        dialog = new SpotsDialog(this);
+        dialog.show();
         models = new ArrayList<>();
         //models.add(new Model(1, "Продавец", "23000", "Моя компания", "Опыт", "Работа", "8", "t@m.ru"));
         recyclerView = (RecyclerView) findViewById(R.id.rvlist);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        ModelAdapter modelAdapter = new ModelAdapter(models);
+        ModelAdapter modelAdapter = new ModelAdapter(this, models);
         recyclerView.setAdapter(modelAdapter);
-
 
         //Log.d("rr", "T1");
         App.getJobApi().getJob().enqueue(new Callback<Model>() {
@@ -52,11 +56,11 @@ public class MainActivityJob extends AppCompatActivity
             @Override
             public void onResponse(Call<Model> call, Response<Model> response) {
 
-
                 Model model = response.body();
                 models.addAll(model.getVacancies());
-               // Log.d("rr1",response.body().getVacancies().get(1).getHeader().toString());
+                // Log.d("rr1",response.body().getVacancies().get(1).getHeader().toString());
                 recyclerView.getAdapter().notifyDataSetChanged();
+                dialog.dismiss();
             }
 
             @Override
@@ -64,8 +68,13 @@ public class MainActivityJob extends AppCompatActivity
 
             }
         });
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        materialSearchView = findViewById(R.id.mysearch);
+        materialSearchView.clearFocus();
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -94,6 +103,9 @@ public class MainActivityJob extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_activity_job, menu);
+        MenuItem item = menu.findItem(R.id.search);
+        materialSearchView.setMenuItem(item);
+
         return true;
     }
 
@@ -123,12 +135,17 @@ public class MainActivityJob extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
-
+           Intent intent = new Intent(this,CompanyListActivity.class);
+           startActivity(intent);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
+
+        } else if (id == R.id.nav_news) {
+            intent = new Intent(this,NewsActivity.class);
+            startActivity(intent);
 
         }
 

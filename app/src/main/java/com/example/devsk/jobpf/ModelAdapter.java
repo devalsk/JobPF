@@ -1,28 +1,26 @@
 package com.example.devsk.jobpf;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.devsk.jobpf.models.Model;
-import com.example.devsk.jobpf.models.Vacancy;
+import com.example.devsk.jobpf.modelsvacancy.Vacancy;
 
 import java.util.List;
-
-import static android.support.v4.content.ContextCompat.startActivity;
 
 public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> {
 
     //private List<Model> models;
     private List<Vacancy> vacancies;
+    private  Context context;
 
 
-    public ModelAdapter(List<Vacancy> vacancies) {
+    public ModelAdapter(Context context,List<Vacancy> vacancies) {
+        this.context = context;
         this.vacancies = vacancies;
 
     }
@@ -38,9 +36,8 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
         Vacancy vacancy = vacancies.get(position);
 
         holder.nameProf.setText(vacancy.getHeader());
-        holder.zp.setText(vacancy.getZpMin());
+        holder.zp.setText(vacancy.getZpMin() + " руб.");
         holder.company.setText(vacancy.getCompany().getTitle());
-
 
     }
 
@@ -68,7 +65,11 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.ViewHolder> 
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
                         Vacancy clickVacancyData = vacancies.get(pos);
-                        Log.d("click", clickVacancyData.getHeader());
+                       // Log.d("click", clickVacancyData.getHeader());
+                        Intent intent = new Intent(context,DetailsActivityJob.class);
+                        intent.putExtra("data", clickVacancyData);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
 
                     }
                 }
