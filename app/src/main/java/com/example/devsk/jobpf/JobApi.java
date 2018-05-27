@@ -13,6 +13,6 @@ public interface JobApi {
     Call<Model> getJob();
     @GET("bins/r16q2")
     Call<NewsModel> getNews();
-    @GET("bins/9maz6")
+    @GET("/bins/medjy")
     Call<CompaniesModel> getCompanies();
 }

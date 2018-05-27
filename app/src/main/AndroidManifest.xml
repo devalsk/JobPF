@@ -4,6 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -43,7 +48,14 @@
         <activity
             android:name=".CompanyListActivity"
             android:label="Компании" />
-        <activity android:name=".DetailsCompanyActivity"></activity>
+        <activity android:name=".DetailsCompanyActivity" />
+        <activity
+            android:name=".ProjectActivity"
+            android:label="@string/title_activity_project1"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"></activity>
     </application>
 
 </manifest>

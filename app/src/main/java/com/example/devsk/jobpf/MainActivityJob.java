@@ -131,7 +131,8 @@ public class MainActivityJob extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            intent = new Intent(this,LoginActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -140,13 +141,13 @@ public class MainActivityJob extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         } else if (id == R.id.nav_news) {
             intent = new Intent(this,NewsActivity.class);
             startActivity(intent);
 
+        }else if (id == R.id.nav_project){
+            intent = new Intent(this,ProjectActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
