@@ -1,9 +1,11 @@
 package com.example.devsk.jobpf;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -17,16 +19,21 @@ public class BrowserActivity extends AppCompatActivity {
     WebView webView;
     SpotsDialog dialog;
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;
+            case R.id.share:
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Click Here");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "http");
+                startActivity(Intent.createChooser(sharingIntent,"Отправить новость"));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
     @Override
@@ -59,7 +66,10 @@ public class BrowserActivity extends AppCompatActivity {
             }
 
         }
-    }
+    } public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_details_activity,menu);
+        return true;
 
+    }
 
 }

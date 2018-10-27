@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewPagerAdapter extends FragmentPagerAdapter{
+public class ViewPagerAdapter extends FragmentPagerAdapter {
 
-     private final List<Fragment> fragmentsList = new ArrayList<>();
-     private final List<String>   ListStr =  new ArrayList<>();
+    private final List<Fragment> fragmentsList = new ArrayList<>();
+    private final List<String> ListStr = new ArrayList<>();
 
 
     public ViewPagerAdapter(FragmentManager fm) {
@@ -21,6 +21,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter{
     @Override
     public Fragment getItem(int position) {
         return  fragmentsList.get(position);
+
+
     }
 
     @Override
@@ -34,7 +36,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter{
     }
 
 
-    public  void addFragment(Fragment fragment,String title){
+    public void addFragment(Fragment fragment, String title) {
 
         fragmentsList.add(fragment);
         ListStr.add(title);

@@ -1,5 +1,6 @@
 package com.example.devsk.jobpf;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBar;
@@ -13,6 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.devsk.jobpf.modelsvacancy.Vacancy;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 
 public class DetailsActivityJob extends AppCompatActivity {
 
@@ -28,7 +33,6 @@ public class DetailsActivityJob extends AppCompatActivity {
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-
         headerView = findViewById(R.id.t_name_prof);
         zpView = findViewById(R.id.t_zp);
         adressView = findViewById(R.id.t_adress);
@@ -43,7 +47,7 @@ public class DetailsActivityJob extends AppCompatActivity {
         if (intentTheStartedActivity.hasExtra("data")) {
             vacancy = getIntent().getParcelableExtra("data");
             //Log.d("fl",vacancy.getZpMin());
-            header = vacancy.getHeader();
+            header =vacancy.getHeader();
             zp = vacancy.getZpMin();
             adress = vacancy.getContact().getStreet();
             bilding = vacancy.getContact().getBilding();
@@ -90,6 +94,15 @@ public class DetailsActivityJob extends AppCompatActivity {
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "http");
                 startActivity(Intent.createChooser(sharingIntent,"Отправить вакансию"));
                 return true;
+            case R.id.saveDataBase:
+                Realm.init(this);
+                Realm realm = Realm.getDefaultInstance();
+                realm.beginTransaction();
+                RealmTest realmTest = realm.createObject(RealmTest.class);
+                realmTest.setName("Ivan");
+                realm.commitTransaction();
+                Realm.getInstance(new RealmConfiguration.Builder().build());
+                return  true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -99,7 +112,6 @@ public class DetailsActivityJob extends AppCompatActivity {
 
         String toDial = "tel:" + telefon;
         startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(toDial)));
-
 
     }
 

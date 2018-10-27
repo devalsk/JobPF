@@ -33,7 +33,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:paddingTop="50dp"
+
                 android:layout_height="wrap_content">
 
                 <AutoCompleteTextView
@@ -45,7 +45,7 @@
                     android:drawableLeft="@drawable/ic_person_outline_red_400_24dp"
                     android:drawablePadding="16dp"
                     android:ems="10"
-                    android:hint="Email Address"
+                    android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:padding="16dp"
@@ -58,32 +58,60 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:padding="16dp"
-                    android:hint="password"
-                    android:textColorHint="#fa97a0"
-                    android:maxLines="1"
-                    android:inputType="textPassword"
-                    android:drawableLeft="@drawable/ic_lock_red_400_24dp"
-                    android:layout_marginTop="16dp"
-                    android:drawablePadding="16dp"/>
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:padding="16dp"
+                android:hint="Пароль"
+                android:textColorHint="#fa97a0"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:drawableLeft="@drawable/ic_lock_red_400_24dp"
+                android:layout_marginTop="16dp"
+                android:drawablePadding="16dp"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/email_sign_in_button"
+            android:id="@+id/email_sign_in_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Войти"
+            android:clickable="true"
+            android:textColor="#f16371"
+            android:padding="16dp"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:textAllCaps="false"
+            android:background="@drawable/bkgd_red_2" />
+            <Button
+            android:id="@+id/reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Регистрация"
+            android:clickable="true"
+            android:textColor="#f16371"
+            android:padding="16dp"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="16dp"
+            android:textAllCaps="false"
+            android:background="@drawable/bkgd_red_2" />
+            <Button
+                android:id="@+id/passen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" Sign in"
+                android:text="Забыли пароль ?"
                 android:clickable="true"
                 android:textColor="#f16371"
                 android:padding="16dp"
                 android:textSize="18sp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="16dp"
                 android:textAllCaps="false"
                 android:background="@drawable/bkgd_red_2" />

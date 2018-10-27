@@ -55,7 +55,13 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="JobPF" />
+        <activity
+            android:name=".DetailsProject"
+            android:label="@string/title_activity_details_project"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".DetailProjectActivity" />
+        <activity android:name=".FavoritesActivity"></activity>
     </application>
 
 </manifest>

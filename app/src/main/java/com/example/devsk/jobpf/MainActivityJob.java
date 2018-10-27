@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.devsk.jobpf.modelsvacancy.Model;
+import com.example.devsk.jobpf.modelsvacancy.Vacancy;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
@@ -26,13 +27,16 @@ import retrofit2.Response;
 
 
 public class MainActivityJob extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     RecyclerView recyclerView;
-    List models;
+    List<Vacancy> models;
     SpotsDialog dialog;
     Intent intent;
     MaterialSearchView materialSearchView;
+    VacancyAdapter vacancyAdapter;
+    Model model;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,22 +45,23 @@ public class MainActivityJob extends AppCompatActivity
         dialog = new SpotsDialog(this);
         dialog.show();
         models = new ArrayList<>();
-        //models.add(new Model(1, "Продавец", "23000", "Моя компания", "Опыт", "Работа", "8", "t@m.ru"));
+
+
         recyclerView = (RecyclerView) findViewById(R.id.rvlist);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        ModelAdapter modelAdapter = new ModelAdapter(this, models);
-        recyclerView.setAdapter(modelAdapter);
+        vacancyAdapter = new VacancyAdapter(this, models);
+        recyclerView.setAdapter(vacancyAdapter);
 
-        //Log.d("rr", "T1");
+
         App.getJobApi().getJob().enqueue(new Callback<Model>() {
 
 
             @Override
             public void onResponse(Call<Model> call, Response<Model> response) {
 
-                Model model = response.body();
+                model = response.body();
                 models.addAll(model.getVacancies());
                 // Log.d("rr1",response.body().getVacancies().get(1).getHeader().toString());
                 recyclerView.getAdapter().notifyDataSetChanged();
@@ -105,6 +110,22 @@ public class MainActivityJob extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main_activity_job, menu);
         MenuItem item = menu.findItem(R.id.search);
         materialSearchView.setMenuItem(item);
+        materialSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+       @Override
+       public boolean onQueryTextSubmit(String query) {
+           return false;
+       }
+
+       @Override
+       public boolean onQueryTextChange(String newText) {
+
+           if (vacancyAdapter != null) vacancyAdapter.getFilter().filter(newText);
+           return true;
+
+
+       }
+   });
+
 
         return true;
     }
@@ -139,6 +160,8 @@ public class MainActivityJob extends AppCompatActivity
            Intent intent = new Intent(this,CompanyListActivity.class);
            startActivity(intent);
         } else if (id == R.id.nav_manage) {
+            Intent intent = new Intent(this,FavoritesActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_share) {
         } else if (id == R.id.nav_news) {
@@ -154,4 +177,7 @@ public class MainActivityJob extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
 }

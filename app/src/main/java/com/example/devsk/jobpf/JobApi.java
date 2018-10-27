@@ -9,9 +9,9 @@ import retrofit2.http.GET;
 
 public interface JobApi {
 
-    @GET("bins/1cleju")
+    @GET("/bins/14xh2a")
     Call<Model> getJob();
-    @GET("bins/r16q2")
+    @GET("web/index.php?r=api/news")
     Call<NewsModel> getNews();
     @GET("/bins/medjy")
     Call<CompaniesModel> getCompanies();

@@ -95,6 +95,7 @@
                         android:drawableLeft="@drawable/ic_action_name_email"
                         android:onClick="onClickEmail"
                         android:text="email"
+                        android:textColor="#24a2cb"
                         android:textSize="14sp" />
 
                     <TextView
@@ -104,17 +105,19 @@
                         android:layout_marginTop="5dp"
                         android:drawableLeft="@drawable/ic_action_name_place"
                         android:onClick="onClickMaps"
-                        android:text="adress" />
+                        android:text="adress"
+                        android:textColor="#24a2cb" />
 
                     <TextView
                         android:id="@+id/data_telefon"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="30dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:layout_marginTop="5dp"
                         android:drawableLeft="@drawable/ic_action_name_mobile"
                         android:onClick="onClickTel"
                         android:text="telefon"
+                        android:textColor="#24a2cb"
                         tools:layout_editor_absoluteX="8dp"
                         tools:layout_editor_absoluteY="251dp" />
 

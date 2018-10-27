@@ -13,6 +13,7 @@ import com.example.devsk.jobpf.modelnews.NewsModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,6 +22,7 @@ public class NewsActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     List news;
+    SpotsDialog dialog;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -50,14 +52,16 @@ public class NewsActivity extends AppCompatActivity {
         NewsAdapter newsAdapter = new NewsAdapter(news, this);
         recyclerView.setAdapter(newsAdapter);
 
-        App.getJobApi().getNews().enqueue(new Callback<NewsModel>() {
+        dialog = new SpotsDialog(this);
+        dialog.show();
+        App.getJobApiProfit().getNews().enqueue(new Callback<NewsModel>() {
             @Override
             public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
                 // Log.d("fd",response.body().getNews().toString());
                 NewsModel newsModel = response.body();
                 news.addAll(newsModel.getNews());
                 recyclerView.getAdapter().notifyDataSetChanged();
-
+                dialog.dismiss();
             }
 
             @Override

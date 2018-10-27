@@ -20,36 +20,37 @@ import java.util.List;
 
 public class ProjectActivity extends AppCompatActivity {
 
-    private  TabLayout tabLayout;
-    private  ViewPager viewPager;
-    private  ViewPagerAdapter viewPagerAdapter;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project1);
-
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                onBackPressed();// возврат на предыдущий activity
+            }
+        });
 
         tabLayout = findViewById(R.id.tabs);
         viewPager = findViewById(R.id.container);
-        viewPagerAdapter  = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        viewPagerAdapter.addFragment(new FragmentProject(),"Проекты");
-        viewPagerAdapter.addFragment(new FragmentDevelopments(),"События");
-
+        viewPagerAdapter.addFragment(new FragmentProject(), "мои проекты");
+        viewPagerAdapter.addFragment(new FragmentProjectVT(), "участвую");
+        viewPagerAdapter.addFragment(new FragmentProjectOpen(), "открытые");
 
 
         viewPager.setAdapter(viewPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager,true);
-
-
-
-
-
-
-
-
+        tabLayout.setupWithViewPager(viewPager, true);
 
     }
 
@@ -75,11 +76,6 @@ public class ProjectActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
 
 
 }

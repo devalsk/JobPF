@@ -25,12 +25,14 @@ public class FragmentProject extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         projectList = new ArrayList<>();
-        projectList.add(new Project("Tex1"));
-        projectList.add(new Project("Tex2"));
-        projectList.add(new Project("Tex2"));
+        projectList.add(new Project("http://adminu.ru/wp-content/uploads/2011/11/adminu-website-500x375.jpg",
+                "Разработка веб-сайта","Нужно разработать  вебсайт для подготовки к экзаменам","devalsk",
+                "https://github.com/devalsk/site-project1","devalsk@yandex.ru","https://github.com/devalsk"));
+
     }
 
     public FragmentProject() {
+
     }
 
     @Nullable
@@ -39,9 +41,9 @@ public class FragmentProject extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_project_activity1,container,false);
         recyclerView = v.findViewById(R.id.list_project);
-        FragmentAdapterProject fragmentAdapterProject = new FragmentAdapterProject(projectList);
+        FragmentAdapterProject fragmentAdapterProject = new FragmentAdapterProject(getActivity(),projectList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.addItemDecoration(new SpaceItemDecoration(50));
+        recyclerView.addItemDecoration(new SpaceItemDecoration(20));
         recyclerView.setAdapter(fragmentAdapterProject);
         return v;
     }
